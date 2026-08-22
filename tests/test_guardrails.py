@@ -35,8 +35,9 @@ def test_prompt_injection_and_base64_smuggling_blocked(guard):
 
 
 def test_pii_and_credential_redaction(guard):
+    mock_api_key = "sk-" + ("mockcred" * 3)
     query = (
-        "Contact john.doe@enterprise.com or 555-123-4567 with key sk-abcdef1234567890123456 "
+        f"Contact john.doe@enterprise.com or 555-123-4567 with key {mock_api_key} "
         "from IP 192.168.1.100"
     )
     res = guard.inspect_query(query)
